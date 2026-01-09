@@ -1,25 +1,34 @@
-
 package app.store;
 
-import redis.clients.jedis.Jedis;
 import app.model.Student;
 import com.google.gson.Gson;
+import redis.clients.jedis.Jedis;
 
 public class RedisStore {
-    static Jedis jedis;
-    static Gson gson = new Gson();
+    private Jedis jedis;
+    private Gson gson = new Gson();
 
-    public static void init() {
-        jedis = new Jedis("localhost", 6379); // IP ve PORT burada
-        for (int i = 0; i < 10000; i++) {
-            String id = "2025" + String.format("%06d", i);
-            Student s = new Student(id, "Ad Soyad " + i, "Bilgisayar");
-            jedis.set(id, gson.toJson(s));
+    public RedisStore() {
+        // Redis varsayılan portu 6379'dur
+        this.jedis = new Jedis("localhost", 6379);
+        System.out.println("Redis bağlantısı sağlandı.");
+        initData();
+    }
+
+    private void initData() {
+        // Eğer veri yoksa 10.000 kayıt ekle
+        if (jedis.dbSize() < 10000) {
+            System.out.println("Redis'e veri yükleniyor...");
+            for (int i = 0; i < 10000; i++) {
+                String id = String.valueOf(2025000000 + i);
+                Student s = new Student(id, "Ogrenci " + i, "Muhendislik");
+                jedis.set(id, gson.toJson(s));
+            }
+            System.out.println("Redis veri yükleme tamamlandı.");
         }
     }
 
-    public static Student get(String id) {
-        String json = jedis.get(id);
-        return gson.fromJson(json, Student.class);
+    public String getStudent(String studentNo) {
+        return jedis.get(studentNo);
     }
 }
