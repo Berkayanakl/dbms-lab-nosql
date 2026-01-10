@@ -16,7 +16,7 @@ public class RedisStore {
     }
 
     private void initData() {
-        // Eğer veri yoksa 10.000 kayıt ekle
+        
         if (jedis.dbSize() < 10000) {
             System.out.println("Redis'e veri yükleniyor...");
             for (int i = 0; i < 10000; i++) {
