@@ -11,7 +11,7 @@ public class Student {
         this.department = department;
     }
 
-    // Getter ve Setter'lar
+    
     public String getStudent_no() { return student_no; }
     public String getName() { return name; }
     public String getDepartment() { return department; }
