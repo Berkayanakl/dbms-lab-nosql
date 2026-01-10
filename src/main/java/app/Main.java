@@ -19,7 +19,7 @@ public class Main {
     static MongoStore mongoStore;
 
     public static void main(String[] args) throws IOException {
-        // 1. Veritabanlarını başlat
+        
         System.out.println("Veritabanları başlatılıyor...");
         redisStore = new RedisStore();
         hazelcastStore = new HazelcastStore();
