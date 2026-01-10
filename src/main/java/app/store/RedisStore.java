@@ -9,7 +9,7 @@ public class RedisStore {
     private Gson gson = new Gson();
 
     public RedisStore() {
-        // Redis varsayılan portu 6379'dur
+        
         this.jedis = new Jedis("localhost", 6379);
         System.out.println("Redis bağlantısı sağlandı.");
         initData();
