@@ -13,7 +13,7 @@ import java.net.InetSocketAddress;
 
 public class Main {
 
-    // Store'ları static tanımlayalım ki handler içinden erişebilelim
+    
     static RedisStore redisStore;
     static HazelcastStore hazelcastStore;
     static MongoStore mongoStore;
@@ -25,10 +25,10 @@ public class Main {
         hazelcastStore = new HazelcastStore();
         mongoStore = new MongoStore();
 
-        // 2. HTTP Sunucusunu başlat (Port 8080)
+        
         HttpServer server = HttpServer.create(new InetSocketAddress(8081), 0);
 
-        // 3. Endpointleri tanımla
+        
         server.createContext("/nosql-lab-rd", new RedisHandler());
         server.createContext("/nosql-lab-hz", new HazelcastHandler());
         server.createContext("/nosql-lab-mon", new MongoHandler());
@@ -38,7 +38,7 @@ public class Main {
         server.start();
     }
 
-    // Ortak Yardımcı Metot: URL'den student_no'yu parse etme
+    
     private static String getStudentIdFromQuery(String query) {
         if (query != null && query.startsWith("student_no=")) {
             return query.split("=")[1];
@@ -46,7 +46,7 @@ public class Main {
         return null;
     }
 
-    // Ortak Yardımcı Metot: Yanıtı Gönderme
+    
     private static void sendResponse(HttpExchange exchange, String response) throws IOException {
         if (response == null) {
             String msg = "Ogrenci bulunamadi";
@@ -63,7 +63,7 @@ public class Main {
         }
     }
 
-    // --- Handlers ---
+    
 
     static class RedisHandler implements HttpHandler {
         @Override
