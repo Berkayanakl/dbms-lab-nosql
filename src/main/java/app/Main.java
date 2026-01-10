@@ -72,7 +72,7 @@ public class Main {
 
             String path = exchange.getRequestURI().getPath();
             String[] parts = path.split("/");
-            String lastPart = parts[parts.length - 1]; // student_no=xxxx
+            String lastPart = parts[parts.length - 1]; 
 
             String studentId = getStudentIdFromQuery(lastPart);
             String result = redisStore.getStudent(studentId);
