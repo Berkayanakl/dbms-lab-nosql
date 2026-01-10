@@ -33,7 +33,7 @@ public class Main {
         server.createContext("/nosql-lab-hz", new HazelcastHandler());
         server.createContext("/nosql-lab-mon", new MongoHandler());
 
-        server.setExecutor(null); // default executor
+        server.setExecutor(null); 
         System.out.println("Sunucu çalışıyor: http://localhost:8080");
         server.start();
     }
@@ -68,9 +68,7 @@ public class Main {
     static class RedisHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            // URL yapısı: /nosql-lab-rd/student_no=12345
-            // URI path'in son kısmını almalıyız çünkü query string değil path param gibi verilmiş örnekte.
-            // Örnek: localhost:8080/nosql-lab-rd/student_no=xxxxxxxxxx
+            
 
             String path = exchange.getRequestURI().getPath();
             String[] parts = path.split("/");
