@@ -37,8 +37,8 @@ public class MongoStore {
     public String getStudent(String studentNo) {
         Document doc = collection.find(eq("student_no", studentNo)).first();
         if (doc != null) {
-            // MongoDB formatını JSON string'e çeviriyoruz
-            doc.remove("_id"); // ID alanını gizlemek istersen
+            
+            doc.remove("_id"); 
             return doc.toJson();
         }
         return null;
